@@ -10,8 +10,8 @@ function App() {
   const [Rate, setRate] = useState(0);
   const [Year, setYear] = useState(0);
   const [isPrinciple, setIsPrinciple] = useState(true)
-  const [isRate,setIsRate] = useState(true)
-  const [isYear,setIsYear] = useState(true)
+  const [isRate, setIsRate] = useState(true)
+  const [isYear, setIsYear] = useState(true)
 
   //logic
   const handleSubmit = (e) => {
@@ -28,38 +28,37 @@ function App() {
   }
 
   const validate = (e) => {
-    const { value,name } = e.target;
+    const { value, name } = e.target;
     console.log(name)
     //regular expression 
     if (!!value.match(/^[0-9]+(\.[0-9]+)?$/)) { // !! is used to convert result of regular expression to boolean value
-     if(name ==='principle')
-      {
+      if (name === 'principle') {
         setPrinciple(value)
-      setIsPrinciple(true)
-    }
-    else if (name ==='rate'){
-      setRate(value);
-      setIsRate(true)
-    }
-    else{
-      setYear(value);
-      setIsYear(true)
-    }
+        setIsPrinciple(true)
+      }
+      else if (name === 'rate') {
+        setRate(value);
+        setIsRate(true)
+      }
+      else {
+        setYear(value);
+        setIsYear(true)
+      }
     }
     else {
-      if(name==='principle'){
+      if (name === 'principle') {
         setPrinciple(value)
         setIsPrinciple(false)
       }
-      else if(name ==='rate'){
+      else if (name === 'rate') {
         setRate(value);
         setIsRate(false)
       }
-      else{
+      else {
         setYear(value);
         setIsYear(false)
       }
-      
+
     }
   }
   return (
@@ -89,20 +88,20 @@ function App() {
           </div>
           {!isRate &&
             <div>
-            <p className='text-danger'>Invalid Input</p>
-          </div>}
+              <p className='text-danger'>Invalid Input</p>
+            </div>}
           <div className='mt-3'>
-            <TextField name='year'  id="outlined-basic" label="Year" variant="outlined" className='w-100' value={Year}
+            <TextField name='year' id="outlined-basic" label="Year" variant="outlined" className='w-100' value={Year}
               onChange={(e) => validate(e)} />
           </div>
-          {! isYear &&
+          {!isYear &&
             <div>
-            <p className='text-danger'>Invalid Input</p>
-          </div>
+              <p className='text-danger'>Invalid Input</p>
+            </div>
           }
           <div className='mt-4'>
             <Stack direction="row" spacing={2}>
-              <Button type='submit' style={{ height: "50px" }} variant="contained" className='bg-success w-100'>Calculate</Button>
+              <Button disabled={!isPrinciple || !isRate || !isYear} type='submit' style={{ height: "50px" }} variant="contained" className='bg-success w-100'>Calculate</Button>
               <Button onClick={resetValues} type='reset' style={{ height: "50px", color: "red" }} variant="contained" className="bg-light w-100">Reset</Button>
             </Stack>
           </div>
